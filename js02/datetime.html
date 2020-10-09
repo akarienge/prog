@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datetime_kadai</title>
+    <script>
+        const now =new Date();
+        const year=now.getFullYear();
+        const month=now.getMonth();
+        const date=now.getDate();
+        const day=now.getDay();
+        const h=now.getHours();
+        const m=now.getMinutes();
+        const s=now.getSeconds();
+        const str="現在時刻:";
+        
+        let d ="a";
+        if(day==1){
+            d ="月";
+        }else if(day==2){
+            d ="火";
+        }else if(day==3){
+            d ="水";
+        }else if(day==4){
+            d ="木";
+        }else if(day==5){
+            d ="金";
+        }else if(day==6){
+            d ="土";
+        }else if(day==7){
+            d ="日";
+        }
+        
+        let ampm =0;
+        if(h>=0 && 12>=h){
+            ampm ="午前";
+        }else if(h>=13 && 17>=h){
+            ampm ="午後";
+        }else{
+            ampm("夜");
+        }
+
+        alert(str+year+"年"+month+"月"+date+"日"+d+"曜日"+" "+h+"時"+m+"分"+s+"秒"+"("+ampm+")");
+    </script>
+</head>
+<body>
+    <h1>Datetime</h1>
+</body>
+</html>
