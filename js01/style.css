@@ -1,0 +1,60 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #c1ab05;
+}
+
+.logo{
+    font-size: 10vw;
+    text-align: center;
+    margin: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.main{
+    position: relative;
+}
+
+.main p{
+    position: absolute;
+    text-align: center;
+    font-size: 3vw;
+    top: 4%;
+    left: 15%;
+}
+
+.main a{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute;
+    font-size: 7vw;
+    color: white;
+    top: 40%;
+    left: 40%;
+    border: solid white 2px;
+    padding: 8px;
+}
+
+.main a:hover{
+    color: wheat;
+    border: solid wheat 2px;
+}
+
+img{
+    width: 100%;
+    position: relative;
+}
+
+.p2{
+    opacity: 0.36;
+}
+
+footer{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 4vw;
+    background-color: white;
+    text-align: center;
+}
+
+footer p{
+    opacity: 0.8;
+}
