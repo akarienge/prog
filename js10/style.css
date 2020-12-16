@@ -1,0 +1,31 @@
+body{
+    
+    background-color: #d4ff85;
+}
+
+h1{
+    font-size: 5rem;
+    text-align: center;
+    color: #333;
+}
+
+#drowarea{
+    background-color: white;
+}
+
+section{
+    text-align: center;
+    font-size: 23px;
+}
+
+button{
+    margin-top: 15px;
+}
+
+nav{
+    background-color: rgb(47, 88, 71);
+    border: 4px solid white;
+    padding: 6px;
+    color: white;
+    
+}
