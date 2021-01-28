@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>天気と服</title>
+</head>
+<body>
+    <h1>Weather and Coordination</h1>
+    <p class="citys">都市を選んでね<br>
+        <input type="radio" name="city" value="0"><span id="city1">札幌</span>
+        <input type="radio" name="city" value="1"><span id="city2">仙台</span>
+        <input type="radio" name="city" value="2"><span id="city3">東京</span>
+        <input type="radio" name="city" value="3"><span id="city4">名古屋</span>
+        <input type="radio" name="city" value="4"><span id="city5">大阪</span>
+        <input type="radio" name="city" value="5"><span id="city6">福岡</span>
+    </p>
+
+    <div id="content">
+    
+        <div id="future">
+            <p class="n1">予報</p>
+            <div id="weather"></div>
+        </div>
+
+        <div id="now">
+            <p class="n1">現在の天気</p>
+            <span id="we1"></span>
+            <br>
+            <span id="temp"></span>
+            <span id="humid"></span>
+        </div>
+
+        <!-- <div id="huku">
+            <ul>
+                <li id="au"></li>
+                <li id="nk"></li>
+                <li id="tops"></li>
+                <li id="bottom"></li>
+                <li id="shoes"></li>
+            </ul>
+        </div> -->
+
+    </div>
+
+
+    
+    
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+// key = c73b4d4b90b8b7a52119b91adf9ed9c2
+const citys = ["Sapporo","Sendai","Tokyo","Nagoya","Osaka","Fukuoka"];
+$("[name=city]").on("click",function(){
+    const v = $(this).val();
+    let city =  citys[v];
+    const url_base = "http://api.openweathermap.org/data/2.5/forecast?q="+city;
+    const url = url_base+"&appid=c73b4d4b90b8b7a52119b91adf9ed9c2&units=metric";
+    
+    $.getJSON(url,function(data){
+        console.log(data);
+        $("#temp").html("気温"+Math.round(data.list[0].main.temp*10)/10+"℃");
+        $("#humid").html("湿度"+data.list[0].main.humidity+"%");
+        $("#we1").html(icon(data.list[0].weather[0].icon));
+        $("#weather").html("");
+        yohou(data);
+
+    });
+});
+
+function yohou(a){
+    for(let i=3; i<12; i++){
+        let list = a.list[i];
+        let we = list.weather[0].icon;
+        console.log(list.dt_txt);//時間
+        console.log(list.main.temp);//気温
+        console.log(list.main.humidity);//湿度
+        console.log(list.weather[0].main);//天気
+        console.log(we);//icon number
+
+        let img = icon(we);
+        let html = '<p>'+list.dt_txt+'</p>'+img+'<br><span>気温'+Math.round(list.main.temp*10)/10+'℃</span><span>湿度'+list.main.humidity+'%</span>';
+        $("#weather").append(html);
+    }
+};
+
+function icon(we){
+    let img = "";
+    if((we == '01n') || (we == '01d')){
+            img = '<img src="01.png" alt="#" width="60" height="60">';
+        }else if((we == '02n') || (we == '02d')){
+            img = '<img src="02.png" alt="#" width="60" height="60">';
+        }else if((we == '03n') || (we == '03d')){
+            img = '<img src="03.png" alt="#" width="60" height="60">';
+        }else if((we == '04n') || (we == '04d')){
+            img = '<img src="04.png" alt="#" width="60" height="60">';
+        }else if((we == '09n') || (we == '09d')){
+            img = '<img src="05.png" alt="#" width="60" height="60">';
+        }else if((we == '10n') || (we == '10d')){
+            img = '<img src="06.png" alt="#" width="60" height="60">';
+        }else if((we == '11n') || (we == '11d')){
+            img = '<img src="07.png" alt="#" width="60" height="60">';
+        }else if((we == '13n') || (we == '13d')){
+            img = '<img src="08.png" alt="#" width="60" height="60">';
+        }else if((we == '50n') || (we == '50d')){
+            img = '<img src="09.png" alt="#" width="60" height="60">';
+        }
+    return img;
+
+};
+
+
+
+
+
+</script>
+    
+</body>
+</html>
