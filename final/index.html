@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>天気と服</title>
+    <title>Weather and Coordination</title>
 </head>
 <body>
     <h1>Weather and Coordination</h1>
@@ -19,6 +19,12 @@
 
     <div id="content">
     
+        <div id="huku">
+            <p id="hk" class="n1">どんな服装にしよう？</p>
+            <div id="advice"></div>
+            <div id="human"><br><img src="ww.png" alt="#" width="120" height="150"></div>
+        </div>
+
         <div id="future">
             <p class="n1">予報</p>
             <div id="weather"></div>
@@ -32,21 +38,7 @@
             <span id="humid"></span>
         </div>
 
-        <!-- <div id="huku">
-            <ul>
-                <li id="au"></li>
-                <li id="nk"></li>
-                <li id="tops"></li>
-                <li id="bottom"></li>
-                <li id="shoes"></li>
-            </ul>
-        </div> -->
-
     </div>
-
-
-    
-    
 
 
 
@@ -62,12 +54,50 @@ $("[name=city]").on("click",function(){
     const url = url_base+"&appid=c73b4d4b90b8b7a52119b91adf9ed9c2&units=metric";
     
     $.getJSON(url,function(data){
+        const list = data.list[2];
         console.log(data);
-        $("#temp").html("気温"+Math.round(data.list[0].main.temp*10)/10+"℃");
-        $("#humid").html("湿度"+data.list[0].main.humidity+"%");
-        $("#we1").html(icon(data.list[0].weather[0].icon));
+        $("#temp").html("気温"+Math.round(list.main.temp*10)/10+"℃");
+        $("#humid").html("湿度"+list.main.humidity+"%");
+        $("#we1").html(icon(list.weather[0].icon));
         $("#weather").html("");
+        $("#hk").html("おすすめの服装");
+
         yohou(data);
+
+        $("#advice").css({
+            'background-color': '#fff',
+            'border': '1px solid #fffac6',
+            'border-radius': '20px',
+            'padding': '12px'
+
+        });
+
+        const img = '<br><img src="pw.png" alt="#" width="135" height="150">';
+        $("#human").html(img);
+
+        const tem = Math.round(data.list[7].main.temp*100)/100;
+        if(tem >= 30){
+            $("#advice").html("非常に暑い！！通気性の良い服が◎"+'<br>'+"帽子などで日差しを避けて！");
+        }else if((tem > 25) && (tem < 30)){
+            $("#advice").html("半袖で過ごしてちょうど良いかも"+'<br>'+"帽子などで日差しを避けてね");
+        }else if((tem > 20) && (tem < 26)){
+            $("#advice").html("曇りだったら肌寒いかも。"+'<br>'+"長袖を着るか薄い羽織があると良いね");
+        }else if((tem > 15) && (tem < 20)){
+            $("#advice").html("ちょっと肌寒いかな？"+'<br>'+"薄手のジャケット、カーディガンが活躍！");
+        }else if((tem > 11) && (tem < 15)){
+            $("#advice").html("そこそこ寒いね。ニットの出番"+'<br>'+"他にもパーカー、薄めのアウターが活躍！");
+        }else if((tem > 6) && (tem < 11)){
+            $("#advice").html("冬です！ハイ！冬！！"+'<br>'+"冬服大活躍！マフラーあってもいいね");
+        }else if((tem > 0) && (tem < 6)){
+            $("#advice").html("激さむです！冬服完全防備で！"+'<br>'+"インナーから温めていこう！");
+            const img2 = '<br><img src="cw.png" alt="#" width="120" height="150">';
+            $("#human").html(img2);
+        }else{
+            $("#advice").html("雪国。凍てつく世界。"+'<br>'+"全身にカイロ貼っていこう");
+            const img2 = '<br><img src="cw.png" alt="#" width="120" height="150">';
+            $("#human").html(img2);
+        }
+
 
     });
 });
@@ -91,26 +121,26 @@ function yohou(a){
 function icon(we){
     let img = "";
     if((we == '01n') || (we == '01d')){
-            img = '<img src="01.png" alt="#" width="60" height="60">';
-        }else if((we == '02n') || (we == '02d')){
-            img = '<img src="02.png" alt="#" width="60" height="60">';
-        }else if((we == '03n') || (we == '03d')){
-            img = '<img src="03.png" alt="#" width="60" height="60">';
-        }else if((we == '04n') || (we == '04d')){
+        img = '<img src="01.png" alt="#" width="60" height="60">';
+    }else if((we == '02n') || (we == '02d')){
+        img = '<img src="02.png" alt="#" width="60" height="60">';
+    }else if((we == '03n') || (we == '03d')){
+        img = '<img src="03.png" alt="#" width="60" height="60">';
+    }else if((we == '04n') || (we == '04d')){
             img = '<img src="04.png" alt="#" width="60" height="60">';
-        }else if((we == '09n') || (we == '09d')){
-            img = '<img src="05.png" alt="#" width="60" height="60">';
-        }else if((we == '10n') || (we == '10d')){
-            img = '<img src="06.png" alt="#" width="60" height="60">';
-        }else if((we == '11n') || (we == '11d')){
-            img = '<img src="07.png" alt="#" width="60" height="60">';
-        }else if((we == '13n') || (we == '13d')){
-            img = '<img src="08.png" alt="#" width="60" height="60">';
-        }else if((we == '50n') || (we == '50d')){
-            img = '<img src="09.png" alt="#" width="60" height="60">';
-        }
-    return img;
+    }else if((we == '09n') || (we == '09d')){
+        img = '<img src="05.png" alt="#" width="60" height="60">';
+    }else if((we == '10n') || (we == '10d')){
+        img = '<img src="06.png" alt="#" width="60" height="60">';
+    }else if((we == '11n') || (we == '11d')){
+        img = '<img src="07.png" alt="#" width="60" height="60">';
+    }else if((we == '13n') || (we == '13d')){
+        img = '<img src="08.png" alt="#" width="60" height="60">';
+    }else if((we == '50n') || (we == '50d')){
+        img = '<img src="09.png" alt="#" width="60" height="60">';
+    }
 
+    return img;
 };
 
 

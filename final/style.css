@@ -26,12 +26,14 @@ h1{
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    color: #333;
 }
-
 
 #now{
     display: table-cell;
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 30px;
+    border-right: 2px solid #fff;
 }
 
 .n1{
@@ -48,3 +50,15 @@ h1{
     padding: 0 10px;
 }
 
+#huku{
+    display: table-cell;
+    float: right;
+    padding: 0 40px;
+}
+
+/* #advice{
+    background-color: #fff;
+    border: 1px solid #fffac6;
+    border-radius: 20px;
+    padding: 5px;
+} */
